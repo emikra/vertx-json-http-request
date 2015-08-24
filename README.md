@@ -1,4 +1,4 @@
-# verx-json-http-request
+# vertx-json-http-request
 
 Inspired by [superagent](https://github.com/visionmedia/superagent).
  
