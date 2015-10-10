@@ -44,6 +44,10 @@ public class RequestTestBase extends VertxTestBase {
             ctx.response().setStatusCode(200).end();
         });
 
+        router.get("/nobody").handler(ctx -> {
+           ctx.response().setStatusCode(401).end("");
+        });
+
         server.requestHandler(router::accept);
 
         CountDownLatch finished = new CountDownLatch(1);

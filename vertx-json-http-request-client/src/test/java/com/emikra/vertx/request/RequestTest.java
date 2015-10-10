@@ -1,6 +1,7 @@
 package com.emikra.vertx.request;
 
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
@@ -138,6 +139,17 @@ public class RequestTest extends RequestTestBase {
             testComplete();
         }).errorHandler(error -> {
             fail("Should call the 404 statusCode Handler");
+        }).end();
+
+        await();
+    }
+
+    @Test
+    public void testEmptyBody() {
+
+        this.client.get("/nobody", response -> {
+            JsonObject jsonResponse = response.toJson();
+            testComplete();
         }).end();
 
         await();

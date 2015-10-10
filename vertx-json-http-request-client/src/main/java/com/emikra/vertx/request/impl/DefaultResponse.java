@@ -52,7 +52,12 @@ public class DefaultResponse implements Response {
         JsonObject response = new JsonObject();
 
         response.put("status", this.status);
-        response.put("body", this.bodyJsonObject());
+
+        try {
+            response.put("body", this.bodyJsonObject());
+        } catch (Exception e) {
+            response.put("body", new JsonObject());
+        }
 
         JsonObject jsonHeaders = new JsonObject();
 

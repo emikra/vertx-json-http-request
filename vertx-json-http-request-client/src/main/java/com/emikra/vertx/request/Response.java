@@ -1,5 +1,6 @@
 package com.emikra.vertx.request;
 
+import com.emikra.vertx.request.util.StringUtils;
 import io.vertx.codegen.annotations.VertxGen;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
@@ -16,7 +17,15 @@ public interface Response {
     int status();
 
     default JsonObject bodyJsonObject() {
-        return new JsonObject(bodyString());
+        JsonObject response = null;
+
+        try {
+            response = new JsonObject(bodyString());
+        } catch (Exception e) {
+            throw new RuntimeException("There was an issue decoding the response body to json.");
+        }
+
+        return response;
     }
 
     default String contentType() {
